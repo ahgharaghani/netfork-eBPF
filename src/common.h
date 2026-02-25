@@ -10,11 +10,11 @@ struct container_identity_key {
 };
 
 struct container_identity_val {
-    u8 mac_address[6];
-    u16 __pad; /* Padding for alignment */
     u32 ip_address;
+    u8 mac_address[6];
     u32 flags;
     u64 packets_count;
+    u16 __pad; /* Padding for alignment */
 };
 
 struct dnat_map_key {
@@ -26,8 +26,8 @@ struct dnat_map_key {
 struct dnat_map_val {
     u32 new_dst_ip;
     u16 new_dst_port;
-    u16 flags;
     u32 dst_ifindex;
+    u16 flags;
 };
 
 struct snat_map_key {
@@ -47,7 +47,7 @@ struct forward_policy_key {
 };
 
 struct forward_policy_val {
-    u8 action; /* 0 = DROP, 1 = FORWARD */
+    u8 action;   /* 0 = DROP, 1 = FORWARD */
     u8 __pad[3]; /* Padding for alignment */
 };
 
@@ -58,14 +58,14 @@ struct conntrack_key {
     u16 dst_port;
     u8  proto;
     u8 direction; /* 0 = ingress, 1 = egress */
-    u16  __pad; /* Padding for alignment */
+    u16 __pad;    /* Padding for alignment */
 };
 
 struct conntrack_val {
-    u8  state; /* 0 = NEW, 1 = ESTABLISHED, 2 = RELATED */
+    u8 state;    /* 0 = NEW, 1 = ESTABLISHED, 2 = RELATED */
     u8 nat_type; /* 0 = NONE, 1 = SNAT, 2 = DNAT */
-    u16 __pad; /* Padding for alignment */
-    u32 nat_ip; /* Original value before NAT */
+    u16 __pad;   /* Padding for alignment */
+    u32 nat_ip;  /* Original value before NAT */
     u16 nat_port;
     u16 __pad2; /* Padding for alignment */
     u64 timestamp;
@@ -75,7 +75,7 @@ struct conntrack_val {
 struct global_config {
     u32 host_ip;
     u16 host_port;
-    u16 __pad; /* Padding for alignment */
+    u16 __pad;             /* Padding for alignment */
     u8 default_fwd_action; /* 0 = DROP, 1 = FORWARD */
     u8 enable_conntrack;
     u8 enable_logging;
@@ -87,9 +87,9 @@ struct global_config {
 };
 
 struct metrics_map_key {
+    u32 entity_id;  /* ifindex, or hash of rule key, or user-defined ID */
     u8 entity_type; /* 0=container, 1=network, 2=dnat_rule, 3=snat_rule */
-    u8 __pad[3]; /* Padding for alignment */
-    u32 entity_id; /* ifindex, or hash of rule key, or user-defined ID */
+    u8 __pad[3];    /* Padding for alignment */
 };
 
 struct metrics_map_val {
