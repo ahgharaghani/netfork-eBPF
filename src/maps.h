@@ -56,12 +56,12 @@ struct {
     __type(value, struct global_config);
 } global_config_map SEC(".maps");
 
-struct {
-    __uint(type, BPF_MAP_TYPE_PROG_ARRAY);
-    __uint(max_entries, 8);
-    __type(key, u32);
-    __type(value, fd); /* program fd */
-} prog_array SEC(".maps");
+// struct {
+//     __uint(type, BPF_MAP_TYPE_PROG_ARRAY);
+//     __uint(max_entries, 8);
+//     __type(key, u32);
+//     __type(value, struct fd); /* program fd */
+// } prog_array SEC(".maps");
 
 struct {
     __uint(type, BPF_MAP_TYPE_PERCPU_HASH);
@@ -70,10 +70,10 @@ struct {
     __type(value, struct metrics_map_val);
 } metrics_map SEC(".maps");
 
-struct {
-    __uint(type, BPF_MAP_TYPE_RINGBUF);
-    __uint(max_entries, 1 << 18); /* 256KB */
-    __type(value, struct event_record);
-} events_ringbuf SEC(".maps");
+// struct {
+//     __uint(type, BPF_MAP_TYPE_RINGBUF);
+//     __uint(max_entries, 1 << 18); /* 256KB */
+//     __type(value, struct event);
+// } events SEC(".maps");
 
 #endif /* MAPS_H */

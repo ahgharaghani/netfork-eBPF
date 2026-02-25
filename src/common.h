@@ -4,14 +4,12 @@
 #include "vmlinux.h"
 
 struct container_identity_key {
-    char container_name[64];
-    u32 container_id;
     u32 ifindex;
 };
 
 struct container_identity_val {
-    u32 ip_address;
     u8 mac_address[6];
+    u32 ip_address;
     u32 flags;
     u64 packets_count;
     u16 __pad; /* Padding for alignment */
@@ -97,7 +95,7 @@ struct metrics_map_val {
     u64 bytes;
 };
 
-struct event_record {
+struct event {
     u64 timestamp_ns;
     u32 ifindex;
     u32 src_ip;
